@@ -35,7 +35,7 @@ export default function ActivityFeed() {
             <p className="text-xs text-muted-foreground">980+ toplam log kaydı</p>
           </div>
         </div>
-        <Link href="/logs" className="text-xs text-primary hover:underline flex items-center gap-1">
+        <Link href="/files" className="text-xs text-primary hover:underline flex items-center gap-1">
           Tümü <ExternalLink size={11} />
         </Link>
       </div>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
-import { LayoutDashboard, Layers, AlertTriangle, FileText, BarChart3, Settings, ChevronLeft, ChevronRight, Archive, BookOpen, LogOut } from 'lucide-react';
+import { LayoutDashboard, Layers, AlertTriangle, FileText, Settings, ChevronLeft, ChevronRight, BookOpen, LogOut } from 'lucide-react';
 import { useRole } from '@/context/RoleContext';
 import { type PersonnelRoleKey } from '@/data/mockData';
 
@@ -24,14 +24,8 @@ const NAV_ITEMS: NavItem[] = [
     id: 'nav-risks', label: 'Riskler', icon: AlertTriangle, href: '/risks', badge: 18, badgeColor: 'bg-orange-100 text-orange-500',
     allowedRoles: ['proje-lideri', 'departman-lideri', 'urun-yoneticisi', 'arge-temsilcisi', 'arge-yoneticisi'],
   },
-  { id: 'nav-files', label: 'Dosya & Mesaj', icon: FileText, href: '/files' },
   {
-    id: 'nav-analytics', label: 'Analytics / AI', icon: BarChart3, href: '/analytics',
-    allowedRoles: ['departman-lideri', 'urun-yoneticisi', 'arge-temsilcisi', 'arge-yoneticisi'],
-  },
-  {
-    id: 'nav-logs', label: 'Log & Raporlar', icon: Archive, href: '/logs', badge: 11, badgeColor: 'bg-yellow-100 text-yellow-600',
-    allowedRoles: ['proje-lideri', 'departman-lideri', 'urun-yoneticisi', 'arge-temsilcisi', 'arge-yoneticisi'],
+    id: 'nav-files', label: 'Dosya & Raporlar', icon: FileText, href: '/files', badge: 11, badgeColor: 'bg-yellow-100 text-yellow-600',
   },
   { id: 'nav-onboarding', label: 'Rol Tanımları', icon: BookOpen, href: '/onboarding' },
 ];
@@ -118,7 +112,10 @@ export default function Sidebar({ currentPath = '/dashboard' }: SidebarProps) {
         )}
         {visibleItems.map((item) => {
           const NavIcon = item.icon;
-          const active = item.href === currentPath || (item.id === 'nav-dashboard' && currentPath === '/dashboard') || (item.id === 'nav-workspace' && (currentPath === '/team' || currentPath === '/projects' || currentPath === '/task-kanban-panel'));
+          const active = item.href === currentPath ||
+            (item.id === 'nav-dashboard' && currentPath === '/dashboard') ||
+            (item.id === 'nav-workspace' && (currentPath === '/team' || currentPath === '/projects' || currentPath === '/task-kanban-panel')) ||
+            (item.id === 'nav-files' && (currentPath === '/analytics' || currentPath === '/logs'));
 
           return (
             <Link
